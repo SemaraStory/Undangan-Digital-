@@ -253,3 +253,24 @@ function tampilToast(pesan) {
 /* ---------- 2.10 Jalankan saat halaman dimuat ---------- */
 terapkan();
 renderUcapan();
+/* ============================================================
+   ✨ BAGIAN 3 — PENINGKATAN UX (tambahan, tidak mengubah yang lama)
+============================================================ */
+
+/* ---------- 3.1 Bilah progres scroll ---------- */
+const barProgres = document.getElementById("progres");
+if (barProgres) {
+  addEventListener("scroll", () => {
+    const h = document.documentElement;
+    const maks = h.scrollHeight - h.clientHeight;
+    barProgres.style.width = (maks > 0 ? (h.scrollTop / maks) * 100 : 0) + "%";
+  }, { passive: true });
+}
+
+/* ---------- 3.2 Monogram otomatis dari nama pasangan ---------- */
+function isiMonogram() {
+  const [a, b] = config.coupleTitle.split("&").map(s => s.trim());
+  const teks = (a?.[0] || "") + "&" + (b?.[0] || "");
+  document.querySelectorAll(".monogram").forEach(el => el.textContent = teks);
+}
+isiMonogram();
