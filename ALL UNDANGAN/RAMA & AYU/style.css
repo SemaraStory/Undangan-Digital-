@@ -1,0 +1,255 @@
+/* ============================================================
+   1) VARIABEL PUSAT — UBAH DI SINI UNTUK WARNA & FONT DASAR
+   (font & warna aksen juga bisa diganti lewat blok TAMPILAN
+   di script.js; nilai di sana menimpa nilai di bawah ini)
+============================================================ */
+:root{
+  --latar:#f0efeb;          /* latar halaman terang */
+  --kartu:#fafaf8;          /* kartu putih */
+  --tinta:#151a17;          /* teks utama */
+  --gelap:#101512;          /* area gelap */
+  --garis-gelap:#262b27;    /* garis di area gelap */
+  --abu:#5f6a63;            /* teks sekunder */
+  --aksen:#c2892e;          /* warna aksen */
+  --font-judul:'Poppins',sans-serif;
+  --font-teks:'Poppins',sans-serif;
+  --radius:10px;            /* kelengkungan sudut foto/kartu */
+  /* Skala jarak sistematis (dipakai konsisten di semua section) */
+  --jarak-section:88px;     /* jarak atas-bawah tiap section */
+  --jarak-sisi:20px;        /* jarak kiri-kanan konten ke tepi layar */
+  --lebar-maks:560px;       /* lebar maksimal kolom konten */
+}
+
+/* ===== RESET DASAR ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-teks);
+  background:var(--latar);
+  color:var(--tinta);
+  overflow:hidden;                /* terkunci sebelum undangan dibuka */
+  overflow-x:hidden;              /* cegah scroll menyamping */
+}
+body.dibuka{overflow-y:auto}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============================================================
+   2) UTILITAS (judul, label vertikal, tombol, animasi reveal)
+============================================================ */
+.wadah{max-width:var(--lebar-maks);margin:0 auto}
+.judul-besar{
+  font-family:var(--font-judul);font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.9rem,8vw,3.6rem);letter-spacing:.02em;
+}
+.judul-terang{color:#fff}
+.label-vertikal{
+  writing-mode:vertical-rl;letter-spacing:.4em;text-transform:uppercase;
+  font-size:.7rem;color:var(--abu);
+}
+.btn-pill{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 26px;border-radius:999px;
+  font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  transition:.3s;
+}
+.btn-gelap{background:var(--gelap);color:#fff}
+.btn-outline-terang{border:1px solid rgba(255,255,255,.5);color:#fff}
+.btn-outline-terang:hover{background:rgba(255,255,255,.12)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+.reveal.terlihat{opacity:1;transform:none}
+.bagian{padding:var(--jarak-section) var(--jarak-sisi)}
+.bagian-terang{background:var(--latar)}
+.bagian-gelap{background:var(--gelap);color:#fff}
+
+/* ============================================================
+   3) SAMPUL / COVER — flex 3 zona agar muat di layar pendek
+============================================================ */
+#cover{position:fixed;inset:0;z-index:100;transition:opacity .8s,visibility .8s}
+#cover img{position:absolute;inset:0}
+.cover-lapisan{position:absolute;inset:0;background:linear-gradient(rgba(10,12,10,.4),rgba(10,12,10,.7))}
+#cover.sembunyi{opacity:0;visibility:hidden}
+.cover-isi{
+  position:relative;height:100%;color:#fff;
+  display:flex;flex-direction:column;justify-content:space-between;gap:20px;
+  padding:calc(30px + env(safe-area-inset-top)) var(--jarak-sisi) calc(26px + env(safe-area-inset-bottom));
+}
+.cover-label{letter-spacing:.32em;text-transform:uppercase;font-size:.75rem;font-weight:600}
+.cover-tanggal{letter-spacing:.24em;text-transform:uppercase;font-size:clamp(.85rem,3.6vw,1.15rem);font-weight:600}
+.cover-bawah{display:flex;flex-direction:column;gap:16px}
+.cover-nama{font-family:var(--font-judul);font-weight:700;text-transform:uppercase;font-size:clamp(2.4rem,12.5vw,4.6rem);line-height:1.05}
+.cover-amp{display:block;font-family:'Great Vibes',cursive;font-weight:400;text-transform:none;font-size:.75em;color:var(--aksen);margin:-.1em 0 -.05em .25em}
+.cover-tamu p{font-size:.78rem;opacity:.85}
+.cover-tamu h3{font-family:var(--font-judul);font-size:1.05rem;font-weight:600;margin-top:4px}
+#btnBuka{align-self:flex-start}
+
+/* ============================================================
+   4) KUTIPAN PEMBUKA
+============================================================ */
+.kutipan{max-width:var(--lebar-maks);margin:0 auto;text-align:center}
+.teks-kutipan{font-style:italic;color:var(--abu);line-height:1.9;font-size:.92rem}
+.kutipan cite{display:block;margin-top:16px;font-style:normal;font-weight:600;letter-spacing:.14em;font-size:.85rem}
+
+/* ============================================================
+   5) KARTU MEMPELAI
+   Ruang label vertikal DICADANGKAN lewat padding, sehingga
+   label tidak pernah terpotong / menimpa foto.
+============================================================ */
+#mempelai{display:flex;flex-direction:column;gap:72px}
+.pasangan{position:relative;max-width:var(--lebar-maks);margin:0 auto;width:100%;padding-right:30px} /* cadangan ruang label kanan */
+.pasangan .label-vertikal{position:absolute;top:4px;right:4px}
+.pasangan-foto{border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;box-shadow:0 16px 40px rgba(0,0,0,.12)}
+.pasangan-kartu{
+  position:relative;z-index:2;background:var(--kartu);
+  margin:-26% 0 0 12%;                 /* tumpang-tindih proporsional (persen = ikut mengecil di HP kecil) */
+  padding:clamp(24px,7vw,44px) clamp(18px,6vw,30px);
+  box-shadow:0 20px 50px rgba(0,0,0,.10);
+}
+.pasangan-kartu h2{font-family:var(--font-judul);font-weight:600;font-size:clamp(1.35rem,6.4vw,2.2rem);line-height:1.25}
+.pasangan-deskripsi{margin-top:18px;color:var(--abu);line-height:1.95;font-size:.9rem;white-space:pre-line}
+.tautan-ig{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase}
+/* Posisi cermin untuk mempelai pria */
+.pasangan-balik{padding-right:0;padding-left:30px}
+.pasangan-balik .label-vertikal{right:auto;left:4px}
+.pasangan-balik .pasangan-kartu{margin:-26% 12% 0 0;text-align:right}
+.pasangan-balik .tautan-ig{flex-direction:row-reverse}
+
+/* ============================================================
+   6) AREA GELAP: hitung mundur + kartu acara
+============================================================ */
+#acara{max-width:680px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:26px}
+.hitung-mundur{text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px}
+.hitung-kotak{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:400px}
+.hitung-kotak div{border:1px solid var(--garis-gelap);border-radius:8px;padding:12px 2px}
+.hitung-kotak b{display:block;font-family:var(--font-judul);font-size:clamp(1.1rem,5vw,1.5rem);font-weight:600}
+.hitung-kotak span{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#9aa39c}
+.kartu-acara{border:1px solid var(--garis-gelap);border-radius:4px;padding:clamp(24px,7vw,36px) clamp(20px,6vw,30px)}
+.acara-judul{font-family:var(--font-judul);font-weight:700;font-size:clamp(1.6rem,7vw,2.4rem)}
+.acara-tanggal{margin-top:16px;font-size:1rem}
+.acara-jam{display:flex;align-items:center;gap:10px;margin-top:10px;color:#9aa39c;font-size:.95rem}
+.acara-tempat{font-family:var(--font-judul);font-weight:600;font-size:1.15rem;margin-top:clamp(28px,9vw,56px)}
+.acara-alamat{margin-top:10px;color:#9aa39c;font-size:.9rem}
+.kartu-acara .btn-pill{margin-top:26px;width:100%}
+
+/* ============================================================
+   7) GALERI + LIGHTBOX
+============================================================ */
+#galeri .judul-besar{margin-bottom:30px}
+.galeri-video{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9;margin-bottom:12px;cursor:pointer}
+.galeri-video::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.25)}
+.tombol-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+  width:64px;height:64px;border-radius:50%;background:rgba(20,20,20,.55);
+  display:grid;place-items:center;backdrop-filter:blur(4px);
+}
+.tombol-play svg{width:26px;height:26px;fill:#fff;stroke:none}
+.galeri-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.galeri-grid figure{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;cursor:zoom-in}
+.galeri-grid figure.lebar{grid-column:1/-1;aspect-ratio:16/10}
+.galeri-grid figure img{transition:transform .6s}
+.galeri-grid figure:hover img{transform:scale(1.05)}
+#lightbox{position:fixed;inset:0;z-index:200;background:rgba(5,8,6,.9);display:none;align-items:center;justify-content:center;padding:18px}
+#lightbox.buka{display:flex}
+#lbKonten{width:min(900px,100%)}
+#lbKonten img{border-radius:8px;max-height:80vh;width:auto;max-width:100%;margin:auto}
+#lbKonten iframe{width:100%;aspect-ratio:16/9;border:none;border-radius:8px}
+#btnTutupLb{position:absolute;top:16px;right:16px;color:#fff;font-size:1.2rem}
+
+/* ============================================================
+   8) RSVP & UCAPAN
+============================================================ */
+.rsvp-teks{color:var(--abu);margin:12px 0 26px;line-height:1.8;font-size:.9rem}
+.rsvp-form{display:flex;flex-direction:column;gap:12px}
+.rsvp-form input,.rsvp-form select,.rsvp-form textarea{
+  font-family:inherit;font-size:.88rem;color:var(--tinta);
+  background:var(--kartu);border:1px solid #dcdad4;border-radius:8px;
+  padding:13px 15px;width:100%;outline:none;
+}
+.rsvp-form textarea{min-height:92px;resize:vertical}
+.rsvp-baris{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#daftarUcapan{margin-top:30px;display:flex;flex-direction:column;gap:12px}
+.kartu-ucapan{background:var(--kartu);border:1px solid #e3e1db;border-radius:10px;padding:16px 18px;text-align:left}
+.kartu-ucapan .kepala{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge-status{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;color:#fff}
+.badge-Hadir{background:#2f6b4f}.badge-Ragu{background:#b07d2e}.badge-Tidak{background:#9c3b34}
+.kartu-ucapan time{font-size:.7rem;color:var(--abu);margin-left:auto}
+.kartu-ucapan p{margin-top:10px;color:var(--abu);font-size:.85rem;line-height:1.7}
+.ucapan-kosong{color:var(--abu);font-size:.85rem;text-align:center;padding:18px 0}
+
+/* ============================================================
+   9) HADIAH PERNIKAHAN
+============================================================ */
+#hadiah{text-align:center}
+.hadiah-teks{max-width:480px;margin:14px auto 30px;color:var(--abu);line-height:1.9;font-size:.9rem}
+.hadiah-area{max-height:0;overflow:hidden;transition:max-height .7s ease;display:grid;gap:12px;max-width:400px;margin:22px auto 0}
+.hadiah-area.buka{max-height:420px}
+.kartu-bank{background:var(--kartu);border:1px solid #e3e1db;border-radius:12px;padding:24px 18px}
+.nomor-rek{font-family:var(--font-judul);font-size:1.25rem;font-weight:600;letter-spacing:.08em;margin:8px 0 4px}
+.kartu-bank span{color:var(--abu);font-size:.82rem}
+.btn-salin{margin-top:12px;border:1px solid var(--tinta);border-radius:999px;padding:8px 24px;font-size:.66rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;transition:.3s}
+.btn-salin:hover{background:var(--tinta);color:#fff}
+
+/* ============================================================
+   10) PENUTUP / FOOTER
+============================================================ */
+#penutup{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden}
+#penutup img{position:absolute;inset:0}
+.penutup-lapisan{position:absolute;inset:0;background:linear-gradient(rgba(10,12,10,.15),rgba(10,12,10,.78))}
+.penutup-isi{position:relative;width:100%;text-align:center;color:#fff;padding:60px 22px 40px}
+.tulisan-script{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(2.4rem,9vw,3.8rem)}
+.penutup-pesan{margin-top:16px;font-size:.82rem;line-height:1.9;opacity:.9}
+.penutup-ikon{display:flex;justify-content:center;gap:14px;margin:26px 0}
+.penutup-ikon a{width:50px;height:50px;border:1px solid rgba(255,255,255,.6);border-radius:50%;display:grid;place-items:center;transition:.3s}
+.penutup-ikon a:hover{background:rgba(255,255,255,.15)}
+.penutup-brand{letter-spacing:.32em;text-transform:uppercase;font-size:.68rem;opacity:.85}
+
+/* ============================================================
+   11) TOMBOL MUSIK MELAYANG & TOAST
+============================================================ */
+.tombol-melayang{
+  position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:150;
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(16,21,18,.82);color:#fff;backdrop-filter:blur(6px);
+  display:none;place-items:center;
+}
+body.dibuka .tombol-melayang{display:grid}   /* muncul hanya setelah dibuka */
+#btnMusik svg{width:19px;height:19px;fill:currentColor;stroke:none}
+#ikonPlay{display:none}
+#btnMusik.jeda #ikonPlay{display:block}
+#btnMusik.jeda #ikonPause{display:none}
+#btnMusik:not(.jeda){animation:berputar 7s linear infinite}
+@keyframes berputar{to{transform:rotate(360deg)}}
+#toast{
+  position:fixed;left:50%;bottom:84px;transform:translate(-50%,16px);z-index:300;
+  background:var(--tinta);color:#fff;padding:10px 22px;border-radius:999px;
+  font-size:.78rem;opacity:0;pointer-events:none;transition:.35s;
+  max-width:88vw;text-align:center;
+}
+#toast.tampil{opacity:1;transform:translate(-50%,0)}
+
+/* ============================================================
+   12) RESPONSIF — penyesuaian khusus layar kecil & besar
+============================================================ */
+/* HP kecil (≤ 420px): jarak & tumpang-tindih diperkecil agar rapi */
+@media (max-width:420px){
+  :root{--jarak-section:64px;--jarak-sisi:16px}
+  .pasangan{padding-right:24px}
+  .pasangan-balik{padding-left:24px}
+  .pasangan-kartu{margin:-22% 0 0 10%}
+  .pasangan-balik .pasangan-kartu{margin:-22% 10% 0 0}
+  .rsvp-baris{grid-template-columns:1fr}
+}
+/* Layar sangat pendek: sampul lebih ringkas */
+@media (max-height:640px){
+  .cover-isi{gap:12px}
+  .cover-nama{font-size:clamp(2rem,10vw,3.4rem)}
+  .cover-tamu p{display:none}
+}
+/* Layar lebar: galeri 3 kolom, mempelai berdampingan */
+@media (min-width:900px){
+  .galeri-grid{grid-template-columns:repeat(3,1fr)}
+  #mempelai{flex-direction:row;justify-content:center;gap:56px;max-width:1100px;margin:0 auto}
+  .pasangan{margin:0;max-width:480px}
+}
