@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101512" />
   <title>Undangan Pernikahan — Semara Story</title>
 
-  <!-- ===== FONTS (pilihan font bisa diganti lewat blok TAMPILAN di script.js) ===== -->
+  <!-- ===== FONTS ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Marcellus&family=Great+Vibes&display=swap" rel="stylesheet" />
 
@@ -13,27 +14,33 @@
 </head>
 <body>
 
+<!-- ===== BILAH PROGRES SCROLL (UX: memberi tahu posisi baca) ===== -->
+<div id="progres" aria-hidden="true"></div>
+
 <!-- ============================================================
-     1) SAMPUL / COVER — layar pembuka sebelum undangan dibuka
+     1) SAMPUL / COVER
 ============================================================ -->
 <div id="cover">
-  <img id="coverImg" data-bind-src="heroImg" alt="Sampul" />
+  <img class="kenburns" data-bind-src="heroImg" alt="Sampul" />
   <div class="cover-lapisan"></div>
 
   <div class="cover-isi">
-    <p class="cover-label">Save The Date</p>
+    <!-- Baris atas: monogram otomatis + label -->
+    <div class="cover-atas">
+      <span class="monogram">R&amp;A</span>
+      <p class="cover-label">Save The Date</p>
+    </div>
+
     <p class="cover-tanggal" data-bind="coverDate">RABU, 14 OKTOBER 2026</p>
 
     <div class="cover-bawah">
       <p class="cover-label">The Wedding Of</p>
-      <!-- Nama besar (otomatis dipecah dari "Nama & Nama" di script.js) -->
       <h1 class="cover-nama">
         <span id="coverNamaA">Rama</span>
         <span class="cover-amp">&</span>
         <span id="coverNamaB">Ayu</span>
       </h1>
 
-      <!-- Nama tamu otomatis dari link: .../?to=Nama+Tamu -->
       <div class="cover-tamu">
         <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
         <h3 id="namaTamu">Tamu Undangan</h3>
@@ -48,13 +55,14 @@
 </div>
 
 <!-- ============================================================
-     2) ISI UNDANGAN (muncul setelah "Buka Undangan")
+     2) ISI UNDANGAN
 ============================================================ -->
 <main id="konten">
 
   <!-- ===== 2.1 KUTIPAN PEMBUKA ===== -->
   <section class="bagian bagian-terang">
-    <div class="kutipan reveal">
+    <div class="kutipan reveal-zoom reveal">
+      <span class="ornamen" aria-hidden="true">✦</span>
       <p class="teks-kutipan" data-bind="quoteText"></p>
       <cite data-bind="quoteSource"></cite>
     </div>
@@ -62,9 +70,13 @@
 
   <!-- ===== 2.2 PROFIL MEMPELAI ===== -->
   <section class="bagian bagian-terang" id="mempelai">
+    <div class="kepala-section reveal">
+      <span class="overline">Mempelai</span>
+      <h2 class="judul-besar">Kami Menikah</h2>
+    </div>
 
-    <!-- Mempelai Wanita -->
-    <div class="pasangan reveal">
+    <!-- Mempelai Wanita (masuk dari kiri) -->
+    <div class="pasangan reveal-kiri reveal">
       <span class="label-vertikal">The Bride</span>
       <div class="pasangan-foto">
         <img data-bind-src="brideImg" alt="Mempelai Wanita" />
@@ -79,8 +91,8 @@
       </div>
     </div>
 
-    <!-- Mempelai Pria (posisi cermin) -->
-    <div class="pasangan pasangan-balik reveal">
+    <!-- Mempelai Pria (masuk dari kanan) -->
+    <div class="pasangan pasangan-balik reveal-kanan reveal">
       <span class="label-vertikal">The Groom</span>
       <div class="pasangan-foto">
         <img data-bind-src="groomImg" alt="Mempelai Pria" />
@@ -96,16 +108,33 @@
     </div>
   </section>
 
-  <!-- ===== 2.3 HITUNG MUNDUR + DETAIL ACARA (area gelap) ===== -->
-  <section class="bagian bagian-gelap" id="acara">
+  <!-- ===== PITA BERJALAN (dekorasi pemisah) ===== -->
+  <div class="pita" aria-hidden="true">
+    <div class="pita-jalur">
+      <div class="pita-set">
+        <span data-bind="coupleTitle"></span><span>✦</span><span data-bind="coverDate"></span><span>✦</span>
+        <span data-bind="coupleTitle"></span><span>✦</span><span data-bind="coverDate"></span><span>✦</span>
+      </div>
+      <div class="pita-set">
+        <span data-bind="coupleTitle"></span><span>✦</span><span data-bind="coverDate"></span><span>✦</span>
+        <span data-bind="coupleTitle"></span><span>✦</span><span data-bind="coverDate"></span><span>✦</span>
+      </div>
+    </div>
+  </div>
 
-    <div class="hitung-mundur reveal">
+  <!-- ===== 2.3 HITUNG MUNDUR + DETAIL ACARA ===== -->
+  <section class="bagian bagian-gelap reveal-group" id="acara">
+    <div class="kepala-section">
+      <span class="overline overline-terang">Rangkaian Acara</span>
       <h2 class="judul-besar judul-terang">Save The Date</h2>
+    </div>
+
+    <div class="hitung-mundur">
       <div class="hitung-kotak">
         <div><b id="cdHari">00</b><span>Hari</span></div>
         <div><b id="cdJam">00</b><span>Jam</span></div>
         <div><b id="cdMenit">00</b><span>Menit</span></div>
-        <div><b id="cdDetik">00</b><span>Detik</span></div>
+        <div class="kotak-detik"><b id="cdDetik">00</b><span>Detik</span></div>
       </div>
       <a id="btnKalender" class="btn-pill btn-outline-terang" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
@@ -113,8 +142,7 @@
       </a>
     </div>
 
-    <!-- Kartu Akad Nikah -->
-    <div class="kartu-acara reveal">
+    <div class="kartu-acara">
       <h3 class="acara-judul">Akad Nikah</h3>
       <p class="acara-tanggal" data-bind="akadDate"></p>
       <p class="acara-jam">
@@ -129,8 +157,7 @@
       </a>
     </div>
 
-    <!-- Kartu Resepsi -->
-    <div class="kartu-acara reveal">
+    <div class="kartu-acara">
       <h3 class="acara-judul">Resepsi</h3>
       <p class="acara-tanggal" data-bind="resepsiDate"></p>
       <p class="acara-jam">
@@ -146,13 +173,16 @@
     </div>
   </section>
 
-  <!-- ===== 2.4 GALERI FOTO + VIDEO ===== -->
+  <!-- ===== 2.4 GALERI ===== -->
   <section class="bagian bagian-terang" id="galeri">
     <div class="wadah">
-      <h2 class="judul-besar reveal">Our Gallery</h2>
+      <div class="kepala-section reveal">
+        <span class="overline">Galeri</span>
+        <h2 class="judul-besar">Our Gallery</h2>
+      </div>
 
-      <div id="kartuVideo" class="galeri-video reveal" title="Putar video">
-        <img data-bind-src="heroImg" alt="Video" />
+      <div id="kartuVideo" class="galeri-video reveal-zoom reveal" title="Putar video">
+        <img class="kenburns" data-bind-src="heroImg" alt="Video" />
         <span class="tombol-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
       </div>
 
@@ -163,7 +193,10 @@
   <!-- ===== 2.5 RSVP & UCAPAN ===== -->
   <section class="bagian bagian-terang" id="rsvp">
     <div class="wadah">
-      <h2 class="judul-besar reveal">RSVP</h2>
+      <div class="kepala-section reveal">
+        <span class="overline">Konfirmasi Kehadiran</span>
+        <h2 class="judul-besar">RSVP</h2>
+      </div>
       <p class="rsvp-teks reveal">Mohon konfirmasi kehadiran Anda dan berikan doa restu untuk kami.</p>
 
       <form id="formRsvp" class="rsvp-form reveal">
@@ -187,10 +220,13 @@
     </div>
   </section>
 
-  <!-- ===== 2.6 HADIAH PERNIKAHAN ===== -->
+  <!-- ===== 2.6 HADIAH ===== -->
   <section class="bagian bagian-terang" id="hadiah">
     <div class="wadah">
-      <h2 class="judul-besar reveal">Wedding Gift</h2>
+      <div class="kepala-section reveal">
+        <span class="overline">Tanda Kasih</span>
+        <h2 class="judul-besar">Wedding Gift</h2>
+      </div>
       <p class="hadiah-teks reveal" data-bind="giftDesc"></p>
 
       <button id="btnHadiah" class="btn-pill btn-gelap reveal">
@@ -215,11 +251,26 @@
     </div>
   </section>
 
-  <!-- ===== 2.7 PENUTUP / TERIMA KASIH ===== -->
+  <!-- ===== PITA BERJALAN KEDUA ===== -->
+  <div class="pita" aria-hidden="true">
+    <div class="pita-jalur">
+      <div class="pita-set">
+        <span>Terima Kasih</span><span>✦</span><span>Semara Story</span><span>✦</span>
+        <span>Terima Kasih</span><span>✦</span><span>Semara Story</span><span>✦</span>
+      </div>
+      <div class="pita-set">
+        <span>Terima Kasih</span><span>✦</span><span>Semara Story</span><span>✦</span>
+        <span>Terima Kasih</span><span>✦</span><span>Semara Story</span><span>✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2.7 PENUTUP ===== -->
   <footer id="penutup">
-    <img data-bind-src="footerImg" alt="Penutup" />
+    <img class="kenburns" data-bind-src="footerImg" alt="Penutup" />
     <div class="penutup-lapisan"></div>
     <div class="penutup-isi">
+      <span class="monogram monogram-terang">R&amp;A</span>
       <h2 class="tulisan-script" data-bind="thankText"></h2>
       <p class="penutup-pesan">Merupakan suatu kehormatan dan kebahagiaan bagi kami<br/>apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
 
@@ -240,15 +291,13 @@
   </footer>
 </main>
 
-<!-- ============================================================
-     3) TOMBOL MUSIK MELAYANG (muncul setelah undangan terbuka)
-============================================================ -->
+<!-- ===== TOMBOL MUSIK ===== -->
 <button id="btnMusik" class="tombol-melayang" aria-label="Putar atau jeda musik">
   <svg id="ikonPause" viewBox="0 0 24 24"><rect x="7" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.4" y="5" width="3.6" height="14" rx="1.2"/></svg>
   <svg id="ikonPlay" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
 </button>
 
-<!-- ===== 4) LIGHTBOX (pratinjau foto/video) & TOAST ===== -->
+<!-- ===== LIGHTBOX & TOAST ===== -->
 <div id="lightbox">
   <button id="btnTutupLb" aria-label="Tutup">✕</button>
   <div id="lbKonten"></div>
