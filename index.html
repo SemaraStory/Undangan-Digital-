@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F1F0E7">
+<title>Semara Story Studio • Undangan Pernikahan Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#home">SEMARA<span>Story Studio</span></a>
+  <button class="btn-dark" onclick="openLogin()">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-visual">
+    <div class="spin-wrap">
+      <svg class="spin" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="circ" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
+        <text><textPath href="#circ">SEMARA STORY STUDIO • UNDANGAN DIGITAL •</textPath></text>
+      </svg>
+      <div class="phone">
+        <div class="screen" style="background-image:url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600')">
+          <span class="s-top">SAVE THE DATE</span>
+          <span class="s-date">SENIN, 14 SEPTEMBER 2026</span>
+          <div class="s-names">RAMA<i>&</i>AYU</div>
+          <span class="s-cta"><i class="fa-regular fa-envelope-open"></i> BUKA UNDANGAN</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-count"><small>+</small><b>5+</b><span>Koleksi<br>Eksklusif</span></div>
+  </div>
+  <div class="hero-text">
+    <p>Bagikan momen bahagia Anda lewat undangan pernikahan digital yang elegan, tanpa batas jarak dan waktu.</p>
+    <div class="hero-right">
+      <a class="link-acc" href="#koleksi">Lihat Koleksi <i class="fa-solid fa-arrow-up-right"></i></a>
+      <h1>Undangan Pernikahan Digital</h1>
+    </div>
+  </div>
+</section>
+<section class="section" id="koleksi">
+  <p class="kicker">Koleksi Desain</p>
+  <h2 class="title">Pilih Nuansa.</h2>
+  <div class="grid" id="koleksiGrid"></div>
+</section>
+
+<section class="section center" id="dashboard">
+  <p class="kicker">Dashboard</p>
+  <h2 class="title">Kelola Undanganmu.</h2>
+  <div class="tabs">
+    <button class="tab active" data-tab="t-dash">Dashboard</button>
+    <button class="tab" data-tab="t-kirim">Kirim Undangan</button>
+    <button class="tab" data-tab="t-rsvp">RSVP</button>
+  </div>
+
+  <div class="dash" id="t-dash">
+    <aside class="dash-side">
+      <b>SEMARA</b>
+      <a class="on"><i class="fa-solid fa-house"></i> Dashboard</a>
+      <a><i class="fa-solid fa-paper-plane"></i> Kirim Undangan</a>
+      <a><i class="fa-solid fa-envelope-open-text"></i> RSVP</a>
+      <a class="out"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </aside>
+    <div class="dash-main">
+      <div class="col">
+        <div class="dash-photo"><b>Wayan & Ayu</b><span>semarastory.id/wayan-ayu-lumiere</span></div>
+        <div class="dash-card"><b>Overview</b>
+          <div class="ov">
+            <div><i class="fa-solid fa-clipboard-check"></i><small>TOTAL RSVP</small><b>6</b></div>
+            <div><i class="fa-solid fa-users"></i><small>TOTAL PAX</small><b>14</b></div>
+            <div><i class="fa-solid fa-comments"></i><small>UCAPAN</small><b>4</b></div>
+            <div><i class="fa-solid fa-eye"></i><small>PAGE VIEWS</small><b>0</b></div>
+          </div>
+        </div>
+        <div class="dash-card"><small>Countdown:</small><span class="float-r">Jumat, 28 Agustus 2026</span>
+          <div class="cd-row">
+            <div><b class="js-d">25</b><small>HARI</small></div>
+            <div><b class="js-h">00</b><small>JAM</small></div>
+            <div><b class="js-m">37</b><small>MENIT</small></div>
+            <div><b class="js-s">37</b><small>DETIK</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="dash-card"><b>Rangkaian Acara</b>
+          <div class="ev">
+            <span><i class="fa-regular fa-clock"></i> 15:00 - Selesai <em>Jum, 28 Agu 2026</em></span>
+            <b>Akad Nikah</b><small>Venue Address</small>
+            <button class="btn-line mini">Lihat Lokasi</button>
+          </div>
+        </div>
+        <div class="dash-card"><b>Statistik Tamu</b>
+          <div class="stat-row">
+            <div class="donut"><span>6<small>TOTAL</small></span></div>
+            <ul>
+              <li><i class="dot g"></i> Hadir <b>4</b></li>
+              <li><i class="dot r"></i> Tidak Hadir <b>1</b></li>
+              <li><i class="dot y"></i> Ragu <b>1</b></li>
+            </ul>
+          </div>
+        </div>
+        <div class="dash-card"><b>Ucapan <em class="new">4 New</em></b>
+          <div class="msg"><b>Budi <i class="tag-h">HADIR</i><small>35m ago</small></b><p>"Selamat yaa"</p></div>
+          <div class="msg"><b>Keluarga Besar <i class="tag-h">HADIR</i><small>2h ago</small></b><p>"Selamat menikah, semoga langgeng yaa"</p></div>
+          <button class="btn-line mini">LIHAT SEMUA 4 UCAPAN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash hidden" id="t-kirim">
+    <div class="dash-main single">
+      <div class="dash-card"><b>Kirim Undangan via WhatsApp</b>
+        <div class="field"><label>Nama Tamu</label><input id="wNama" placeholder="cth: Budi"></div>
+        <div class="field"><label>No. WhatsApp (opsional)</label><input id="wNo" placeholder="628xxx"></div>
+        <div class="field"><label>Template Pesan</label>
+          <select id="wTpl" class="sel"><option>Formal</option><option>Teman</option><option>Keluarga</option></select>
+        </div>
+        <button class="btn-dark" onclick="kirimWA()"><i class="fa-brands fa-whatsapp"></i> Generate & Kirim</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash hidden" id="t-rsvp">
+    <div class="dash-main single">
+      <div class="dash-card"><b>Ringkasan RSVP</b>
+        <div class="stat-row">
+          <div class="donut"><span>6<small>TOTAL</small></span></div>
+          <ul>
+            <li><i class="dot g"></i> Hadir <b>4</b></li>
+            <li><i class="dot r"></i> Tidak Hadir <b>1</b></li>
+            <li><i class="dot y"></i> Ragu <b>1</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="dash-card"><b>Data Tamu</b>
+        <table class="tbl">
+          <tr><th>Nama</th><th>Status</th><th>Pax</th></tr>
+          <tr><td>Budi</td><td><i class="tag-h">HADIR</i></td><td>2</td></tr>
+          <tr><td>Keluarga Besar</td><td><i class="tag-h">HADIR</i></td><td>5</td></tr>
+          <tr><td>Sari</td><td><i class="tag-r">TIDAK</i></td><td>1</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">Pantau Semuanya</h3>
+  <p class="desc">Lihat ringkasan lengkap undangan: statistik RSVP, jumlah tamu, countdown hari H, rangkaian acara, dan ucapan terbaru dalam satu halaman.</p>
+</section>
+<section class="section center" id="fitur">
+  <p class="kicker">Fitur</p>
+  <h2 class="title">Semua yang Anda Butuhkan.</h2>
+  <div class="chips" id="chips"></div>
+  <div class="addon"><h3>🎁 Addon</h3><div class="addon-grid" id="addonGrid"></div></div>
+</section>
+
+<section class="section center" id="faq">
+  <p class="kicker">FAQ</p>
+  <h2 class="title">Pertanyaan Umum.</h2>
+  <div class="faq" id="faqList"></div>
+</section>
+
+<section class="section" id="kontak">
+  <div class="cta-box">
+    <div>
+      <p class="kicker">🚀 Promo Launching</p>
+      <h2>Ceritakan Undangan Anda.</h2>
+      <p>Dapatkan harga spesial untuk semua koleksi desain selama masa launching berlangsung.</p>
+      <div class="cd-big">
+        <div><b class="js-d">01</b><small>HARI</small></div>
+        <div><b class="js-h">23</b><small>JAM</small></div>
+        <div><b class="js-m">59</b><small>MENIT</small></div>
+        <div><b class="js-s">50</b><small>DETIK</small></div>
+      </div>
+      <div class="cta-btns">
+        <a class="btn-wa" target="_blank" href="https://wa.me/6281234567890?text=Halo%20Semara%20Story%20Studio"><i class="fa-brands fa-whatsapp"></i> Hubungi via WhatsApp</a>
+        <a class="btn-cream" href="#koleksi">Lihat Koleksi</a>
+      </div>
+    </div>
+    <div class="login-card">
+      <h3><i class="fa-solid fa-lock"></i> Login</h3>
+      <form onsubmit="return doLogin(event)">
+        <div class="field reg-only hidden"><label>Nama</label><input id="rNama"></div>
+        <div class="field"><label>Username / Email</label><input id="lEmail" required></div>
+        <div class="field"><label>Password</label><input id="lPass" type="password" required></div>
+        <button class="btn-dark w100" id="lBtn">Login</button>
+      </form>
+      <p class="swap">Belum punya akun? <a onclick="toggleReg()">Daftar</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-grid">
+    <div>
+      <div class="f-brand">SEMARA<span>STORY STUDIO</span></div>
+      <p class="f-about">Undangan pernikahan digital yang elegan untuk semua tradisi, tanpa batas jarak dan waktu.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div><h4>Navigasi</h4><a href="#koleksi">Koleksi</a><a href="#dashboard">Dashboard</a><a href="#fitur">Fitur</a><a href="#faq">FAQ</a></div>
+    <div><h4>Bantuan</h4><a href="#">Syarat & Ketentuan</a><a href="#">Kebijakan Privasi</a><a href="#">Panduan</a></div>
+    <div><h4>Kontak</h4><a href="mailto:hello@semarastory.id">hello@semarastory.id</a><a href="https://wa.me/6281234567890">+62 812-3456-7890</a></div>
+  </div>
+  <div class="f-bottom"><span>© 2026 Semara Story Studio.</span><span>Crafted with ♥ in Indonesia</span></div>
+</footer>
+
+<div class="modal" id="pvModal"><div class="modal-bg" onclick="closeM('pvModal')"></div>
+  <div class="modal-card"><button class="modal-x" onclick="closeM('pvModal')">✕</button><div id="pvBody"></div></div>
+</div>
+<div class="modal" id="adminModal"><div class="modal-bg" onclick="closeM('adminModal')"></div>
+  <div class="modal-card wide"><button class="modal-x" onclick="closeM('adminModal')">✕</button><div id="adminBody"></div></div>
+</div>
+<div class="toast-wrap" id="toasts"></div>
+
+<button class="fab" onclick="document.getElementById('fabMenu').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+<nav class="fab-menu" id="fabMenu">
+  <a href="#koleksi">Koleksi</a><a href="#dashboard">Dashboard</a><a href="#fitur">Fitur</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/main.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
