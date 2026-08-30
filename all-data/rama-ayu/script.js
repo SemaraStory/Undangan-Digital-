@@ -61,7 +61,7 @@ const DATA_UNDANGAN = {
   videoUrl : "https://www.youtube.com/watch?v=ScMzIvxBSi4",  // link video YouTube
 
   /* ---------- [MUSIK LATAR] ganti dengan link .mp3 Anda ---------- */
-  musicUrl : "https://semarastory.github.io/Undangan-Digital-/all-data/rama-ayu/alex-morgan-wedding-garden-ceremony-glow-578500.mp3",
+  musicUrl : "https://SemaraStory.github.io/Undangan-Digital-/all-data/rama-ayu/alex-morgan-wedding-garden-ceremony-glow-578500.mp3",
 
   /* ---------- [TAMPILAN] font & warna dasar ---------- */
   fontHead : "Poppins",        // pilihan: Poppins | Montserrat | Playfair Display | Cormorant Garamond | Marcellus
